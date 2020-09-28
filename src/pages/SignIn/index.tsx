@@ -45,7 +45,7 @@ const SignIn: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const { signIn, user } = useAuth();
+  const { signIn } = useAuth();
 
   const handleSignIn = useCallback(
     async (data: SignInFormData) => {
@@ -67,8 +67,6 @@ const SignIn: React.FC = () => {
           email: data.email,
           password: data.password,
         });
-
-        console.log({ user });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -128,16 +126,13 @@ const SignIn: React.FC = () => {
                 name="password"
                 icon="lock"
                 placeholder="Senha"
+                textContentType="newPassword"
                 returnKeyType="send"
                 onSubmitEditing={() => {
                   formRef.current?.submitForm();
                 }}
               />
-              <Button
-                onPress={() => {
-                  formRef.current?.submitForm();
-                }}
-              >
+              <Button onPress={() => formRef.current?.submitForm()}>
                 Entrar
               </Button>
             </Form>
@@ -148,11 +143,7 @@ const SignIn: React.FC = () => {
           </Container>
         </ScrollView>
 
-        <CreateAccountButton
-          onPress={() => {
-            navigation.navigate('SignUp');
-          }}
-        >
+        <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
           <Icon name="log-in" size={20} color="#ff9000" />
           <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
         </CreateAccountButton>

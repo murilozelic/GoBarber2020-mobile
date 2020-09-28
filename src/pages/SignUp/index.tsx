@@ -134,28 +134,21 @@ const SignUp: React.FC = () => {
                 name="password"
                 icon="lock"
                 placeholder="Senha"
+                textContentType="newPassword"
                 returnKeyType="send"
                 onSubmitEditing={() => {
                   formRef.current?.submitForm();
                 }}
               />
 
-              <Button
-                onPress={() => {
-                  formRef.current?.submitForm();
-                }}
-              >
+              <Button onPress={() => formRef.current?.submitForm()}>
                 Cadastrar
               </Button>
             </Form>
           </Container>
         </ScrollView>
 
-        <BackToSignIn
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
+        <BackToSignIn onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={20} color="#fff" />
           <BackToSignInText>Voltar para logon</BackToSignInText>
         </BackToSignIn>
