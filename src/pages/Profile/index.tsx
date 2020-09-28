@@ -15,7 +15,6 @@ import * as Yup from 'yup';
 import Icon from 'react-native-vector-icons/Feather';
 import ImagePicker from 'react-native-image-picker';
 
-import ImageEditor from '@react-native-community/image-editor';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
@@ -143,18 +142,12 @@ const Profile: React.FC = () => {
           return;
         }
 
-        const croppedImageURI = await ImageEditor.cropImage(response.uri, {
-          offset: { x: 0, y: 0 },
-          size: { width: response.width, height: response.height },
-          resizeMode: 'contain',
-        });
-
         const data = new FormData();
 
         data.append('avatar', {
           type: 'image/jpeg',
           name: `${user.id}.jpg`,
-          uri: croppedImageURI,
+          uri: response.uri,
         });
 
         api.patch('users/avatar', data).then(apiResponse => {
